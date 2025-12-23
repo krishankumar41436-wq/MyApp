@@ -1,0 +1,8 @@
+{
+  "name": "SnapMen - Premium Men's E-commerce",
+  "description": "A high-fidelity Indian e-commerce mobile app UI for men's fashion, grooming, and accessories, inspired by Snapdeal.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
