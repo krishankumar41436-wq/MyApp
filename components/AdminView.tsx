@@ -219,7 +219,9 @@ const AdminView: React.FC<AdminViewProps> = ({
                   <div className="flex-1 min-w-0">
                     <p className="text-[8px] font-black text-red-500 uppercase tracking-widest leading-none">{p.brand}</p>
                     <h4 className="text-[11px] font-black text-black uppercase truncate mt-1">{p.title}</h4>
-                    <p className="text-[8px] text-gray-400 font-bold uppercase mt-1">{p.category} > {p.subCategory}</p>
+                    <p className="text-[8px] text-gray-400 font-bold uppercase mt-1">
+  {p.category} &gt; {p.subCategory}
+</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <button onClick={() => { setEditingProduct(p); setProductForm(p); setShowProductModal(true); }} className="p-2 bg-gray-50 rounded-xl text-black active:bg-gray-100"><Edit2 size={16}/></button>
