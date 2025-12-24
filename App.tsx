@@ -1,5 +1,5 @@
 
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import TopAppBar from './components/TopAppBar';
 import Home from './components/Home';
 import CategoryView from './components/CategoryView';
@@ -164,7 +164,7 @@ const App: React.FC = () => {
           status: 'Confirmed', 
           date: now.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }), 
           time: now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
-          message: 'Order placed and confirmed.'
+          message: 'Order confirmed.'
         }
       ]
     };
@@ -188,9 +188,9 @@ const App: React.FC = () => {
       case 'CATEGORY_HUB': return <CategoryView categories={categories} onSubCategoryClick={(cat, sub) => { setSelectedCategory(cat); setSelectedSubCategory(sub); setCurrentView('PRODUCT_LIST_VIEW'); }} />;
       case 'PRODUCT_LIST_VIEW': return (
         <div className="pb-20 bg-white min-h-screen">
-          <div className="px-4 py-4 border-b flex items-center gap-3 sticky top-0 bg-white z-10 shadow-sm">
-            <button onClick={() => setCurrentView('CATEGORY_HUB')} className="p-1 active:bg-gray-100 rounded-full"><ChevronLeft size={24} className="text-gray-600"/></button>
-            <h1 className="text-sm font-black uppercase text-gray-800 tracking-widest leading-none">{selectedSubCategory || selectedCategory}</h1>
+          <div className="px-3 py-3 border-b flex items-center gap-2 sticky top-0 bg-white z-10 shadow-sm h-11">
+            <button onClick={() => setCurrentView('CATEGORY_HUB')} className="p-1 active:bg-gray-100 rounded-full"><ChevronLeft size={20} className="text-gray-600"/></button>
+            <h1 className="text-xs font-black uppercase text-gray-800 tracking-widest">{selectedSubCategory || selectedCategory}</h1>
           </div>
           <ProductGrid products={products.filter(p => !selectedCategory || p.category === selectedCategory)} onAddToCart={handleAddToCart} onProductClick={(p) => { setSelectedProduct(p); setCurrentView('PRODUCT_DETAIL'); }} wishlist={wishlist} onToggleWishlist={toggleWishlist} />
         </div>
@@ -225,20 +225,20 @@ const App: React.FC = () => {
         </div>
       </main>
       {['HOME', 'CATEGORY_HUB', 'CART', 'ORDERS', 'PROFILE'].includes(currentView) && (
-        <nav className="h-16 bg-white border-t border-gray-100 flex items-center justify-around z-50 shrink-0 shadow-sm px-2">
+        <nav className="h-14 bg-white border-t border-gray-100 flex items-center justify-around z-50 shrink-0 shadow-sm px-1">
           {[ 
-            { id: 'HOME', label: 'Home', icon: <HomeIcon size={22} /> }, 
-            { id: 'CATEGORY_HUB', label: 'Explore', icon: <LayoutGrid size={22} /> }, 
-            { id: 'CART', label: 'Cart', icon: <ShoppingCart size={22} />, badge: cart.length > 0 ? cart.length : null }, 
-            { id: 'ORDERS', label: 'Orders', icon: <Package size={22} /> }, 
-            { id: 'PROFILE', label: 'Profile', icon: <User size={22} /> }
+            { id: 'HOME', label: 'Home', icon: <HomeIcon size={20} /> }, 
+            { id: 'CATEGORY_HUB', label: 'Explore', icon: <LayoutGrid size={20} /> }, 
+            { id: 'CART', label: 'Cart', icon: <ShoppingCart size={20} />, badge: cart.length > 0 ? cart.length : null }, 
+            { id: 'ORDERS', label: 'Orders', icon: <Package size={20} /> }, 
+            { id: 'PROFILE', label: 'Profile', icon: <User size={20} /> }
           ].map((item) => (
-            <button key={item.id} onClick={() => setCurrentView(item.id as ViewState)} className={`flex flex-col items-center justify-center gap-1 min-w-[60px] transition-all relative ${currentView === item.id ? 'text-[#E40046]' : 'text-gray-400'}`}>
+            <button key={item.id} onClick={() => setCurrentView(item.id as ViewState)} className={`flex flex-col items-center justify-center gap-0.5 min-w-[55px] transition-all relative ${currentView === item.id ? 'text-[#E40046]' : 'text-gray-400'}`}>
               <div className="relative">
                 {item.icon}
-                {item.badge && <span className="absolute -top-1.5 -right-2 bg-[#E40046] text-white text-[8px] font-black min-w-[15px] h-4 flex items-center justify-center rounded-full border-2 border-white leading-none">{item.badge}</span>}
+                {item.badge && <span className="absolute -top-1 -right-1.5 bg-[#E40046] text-white text-[7px] font-black min-w-[12px] h-3.5 flex items-center justify-center rounded-full border border-white leading-none">{item.badge}</span>}
               </div>
-              <span className={`text-[9px] font-black uppercase tracking-tight ${currentView === item.id ? 'opacity-100' : 'opacity-70'}`}>{item.label}</span>
+              <span className={`text-[8px] font-black uppercase tracking-tight ${currentView === item.id ? 'opacity-100' : 'opacity-70'}`}>{item.label}</span>
             </button>
           ))}
         </nav>
